@@ -1,4 +1,4 @@
-    package demo.xml;  
+    package draft.xml;  
       
     import java.io.FileInputStream;  
     import java.io.FileOutputStream;  
@@ -11,7 +11,7 @@ import javax.xml.bind.JAXBContext;
     import javax.xml.bind.Unmarshaller;  
       
     public class jaxbDemo {
-    	public static ListType report;
+    	public static DraftType report;
           
         public static void main(String[] args) throws Exception {  
             unmarshalling();  
@@ -23,11 +23,11 @@ import javax.xml.bind.JAXBContext;
     		Unmarshaller unmarshaller = ctx.createUnmarshaller();
     		@SuppressWarnings("unchecked")
     		String f = jaxbDemo.class.getResource("a.xml").getPath();
-			JAXBElement<ListType> jaxbElem= (JAXBElement<ListType>) unmarshaller.unmarshal( new FileInputStream(   
+			JAXBElement<DraftType> jaxbElem= (JAXBElement<DraftType>) unmarshaller.unmarshal( new FileInputStream(   
                     f));
-    		ListType Report = jaxbElem.getValue();
+			DraftType Report = jaxbElem.getValue();
     		report = Report;
-    		System.out.println(Report.getReports().get(0).getItem().get(0).getAReport().get(0).getFILEPART());
+    		//System.out.println(Report.getReports().get(0).getItem().get(0).getAReport().get(0).getFILEPART());
         }  
           
         static void marshalling()throws Exception{  
@@ -35,11 +35,6 @@ import javax.xml.bind.JAXBContext;
             Marshaller ms = ctx.createMarshaller();  
             ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
               
-            ListType list = new ListType();
-            List<SCRTReportType> scrtlist= list.getScrtReportData();
-            SCRTReportType scrt = new SCRTReportType();
-            scrt.setSubmitDate("fdsfdsfjdshf");
-            scrtlist.add(scrt);
               
             OutputStream os = new FileOutputStream("F:\\xmldemo\\b.xml");  
             ms.marshal(report, os);  
