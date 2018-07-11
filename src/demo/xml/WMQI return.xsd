@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="list" type="ListType"/>
+  <xs:complexType name="oneCustomerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="customer-name"/>
+      <xs:element type="xs:string" name="provided-customer-number"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="oneMachineType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="machine-serial" minOccurs="0"/>
+      <xs:element type="xs:string" name="machine-type" minOccurs="0"/>
+      <xs:element type="xs:string" name="machine-capacity" minOccurs="0"/>
+      <xs:element type="xs:string" name="designated-machine" minOccurs="0"/>             
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCRTReportType">
+    <xs:sequence>
+	  <xs:element type="xs:string" name="unique-request-id" minOccurs="0"/>
+	  <xs:element type="xs:string" name="submit-date" minOccurs="0"/>
+      <xs:element type="xs:string" name="upload-date"  minOccurs="0"/>
+      <xs:element type="xs:string" name="system-status" minOccurs="0"/>
+      <xs:element type="oneCustomerType" name="customer"/>
+      <xs:element type="oneMachineType" name="machine"/>      
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReportType">
+    <xs:sequence>
+      <xs:element type="itemType" name="item" minOccurs="0" maxOccurs="unbounded"/>    
+    </xs:sequence>
+  </xs:complexType>
+   <xs:complexType name="itemType">
+    <xs:sequence>
+      <xs:element type="aReportType" name="aReport" minOccurs="0" maxOccurs="unbounded"/>    
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aReportType">
+    <xs:sequence>
+	  <xs:element type="xs:string" name="FILE_PART" minOccurs="0"/>
+	  <xs:element type="xs:string" name="ROW_ID" minOccurs="0"/>  
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="ListType">
+    <xs:sequence>
+	  <xs:element type="ReportType" name="reports" minOccurs="0" maxOccurs="unbounded"/> 
+	  <xs:element type="SCRTReportType" name="scrt-report-data" minOccurs="0" maxOccurs="unbounded"/>	 	  
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
